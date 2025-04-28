@@ -9,10 +9,10 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
+            "name": "mySql",
+            "database": "userAuthDB",
             "username": "root",
-            "password": "Ballzy",
-            "name": "MYSQL",
-            "database": "userAuthDB"
+            "password": "Ballzy"
         }
     ]
 }

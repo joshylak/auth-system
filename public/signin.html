@@ -22,38 +22,5 @@
             <button type="submit">Sign In</button>
         </form>
     </div>
-
-    <!-- Shooting star animation container -->
-    <div id="shooting-star-container"></div>
-
-    <script>
-        const form = document.getElementById('signinForm');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent default form submission
-
-            const formData = new FormData(form);
-            const response = await fetch('/signin', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.ok) {
-                // Trigger shooting star animation
-                const container = document.getElementById('shooting-star-container');
-                const star = document.createElement('div');
-                star.className = 'shooting-star';
-                container.appendChild(star);
-
-                // Remove the star after the animation ends
-                setTimeout(() => {
-                    container.removeChild(star);
-                }, 2000);
-
-                alert('Sign-in successful!');
-            } else {
-                alert('Sign-in failed. Please check your credentials.');
-            }
-        });
-    </script>
 </body>
 </html>
