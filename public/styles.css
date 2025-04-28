@@ -1,0 +1,101 @@
+/* Center the form on the page */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+}
+
+/* Style the form container */
+.form-container {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the back button */
+.back-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.back-button button {
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-button button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the input fields */
+input[type="text"], input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style the submit button */
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Shooting star container */
+#shooting-star-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* Shooting star animation */
+.shooting-star {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: linear-gradient(45deg, white, rgba(255, 255, 255, 0));
+    border-radius: 50%;
+    box-shadow: 0 0 10px white;
+    animation: shooting-star 2s ease-out forwards;
+}
+
+@keyframes shooting-star {
+    0% {
+        transform: translate(-50%, -50%) rotate(45deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(300px, -300px) rotate(45deg) scale(0.5);
+        opacity: 0;
+    }
+}
