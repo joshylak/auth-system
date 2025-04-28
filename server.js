@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql2');
+const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const path = require('path'); 
@@ -10,21 +10,10 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing form data
 app.use(express.static('public'));
 
 //Database connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Ballzy",
-  database: "userAuthDB",
-});
+const db = new sqlite3.Database('./userAuthDB.sqlite');
 
-// Connect to MySQL database
-db.connect((err) => {
-    if (err) {
-        console.error('Database connection failed: ' + err.stack);
-        return;
-    }
-    console.log('Connected to MySQL database');
-});
+// Create users table if it doesn't exist
+db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT)');
 
 // Root Route
 app.get('/', (req, res) => {
@@ -44,12 +33,12 @@ app.post('/signup', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    db.query(
+    db.run(
         'INSERT INTO users (username, password) VALUES (?, ?)',
         [username, hashedPassword],
-        (err, result) => {
+        function (err) {
             if (err) {
-                if (err.code === 'ER_DUP_ENTRY') {
+                if (err.message.includes('UNIQUE constraint failed')) {
                     return res.status(400).send('Username already exists!');
                 }
                 return res.status(500).send('Server error');
@@ -70,19 +59,17 @@ app.post('/signin', (req, res) => {
         return res.status(400).send('Username and Password are required!');
     }
 
-    db.query(
+    db.get(
         'SELECT * FROM users WHERE username = ?',
         [username],
-        async (err, results) => {
+        async (err, user) => {
             if (err) {
                 console.error('Database error:', err); // Debugging log
                 return res.status(500).send('Server error');
             }
-            if (results.length === 0) {
+            if (!user) {
                 return res.status(400).send('User not found');
             }
-
-            const user = results[0];
 
             // Compare password with hashed password in database
             const isMatch = await bcrypt.compare(password, user.password);
