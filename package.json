@@ -1,0 +1,26 @@
+{
+  "name": "auth-system",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/joshylak/auth-system#readme",
+  "bugs": {
+    "url": "https://github.com/joshylak/auth-system/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshylak/auth-system.git"
+  },
+  "license": "ISC",
+  "author": "Lakin Adeyemo",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1"
+  }
+}
