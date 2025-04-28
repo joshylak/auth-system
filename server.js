@@ -17,7 +17,7 @@ db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT 
 
 // Root Route
 app.get('/', (req, res) => {
-    res.send('Welcome to the Auth System!'); // Simple response for the root URL
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Signup Route 
